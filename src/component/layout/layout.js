@@ -1,8 +1,3 @@
-// import { AppBar, Box, Button } from "@mui/material";
-// import { IconButton, Toolbar, Typography } from "@mui/material";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import React from "react";
-
 // export default function Layout({ children }) {
 //   return (
 //     <div className="container">
@@ -49,6 +44,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -115,9 +111,12 @@ function Layout(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+            {Date()}
           </Typography>
+          <Button color="inherit" sx={{ border: 1 }}>
+            Login
+          </Button>
         </Toolbar>
       </AppBar>
       <Box
