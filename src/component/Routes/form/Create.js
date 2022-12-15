@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Alert, Stack } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Create extends Component {
   constructor(props) {
@@ -43,10 +43,10 @@ export default class Create extends Component {
 
     const { title, description, category } = this.state;
     const postData = { title, description, category };
-    // const navigate = useNavigate();
 
-    axios.post("http://localhost:3004/notes", postData);
-    // .then(() => navigate("/notes"));
+    axios
+      .post("http://localhost:3004/notes", postData)
+      .then(() => <Link to="/"></Link>);
   }
 
   alertForm = () => {
@@ -58,7 +58,7 @@ export default class Create extends Component {
 
   render() {
     return (
-      <Container>
+      <Container sx={{ height: "100vh", py: 3 }}>
         {this.state.validateAlert && (
           <Stack sx={{ width: "100%", pt: 2 }} spacing={2}>
             <Alert
@@ -93,6 +93,7 @@ export default class Create extends Component {
             label="Description"
             multiline
             fullWidth
+            required
             color="primary"
             rows={4}
             sx={{ mb: 2 }}

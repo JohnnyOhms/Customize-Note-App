@@ -2,7 +2,7 @@
   "notes": [
     {
       "title": "Yoshi's birthday bash",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       "category": "reminders",
       "id": 1
     },
@@ -19,10 +19,28 @@
       "id": 3
     },
     {
-      "title": "Complete my ninja training",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
-      "category": "work",
-      "id": 4
+      "title": "Akamega kill",
+      "description": "Tatsumi is a fighter who is accompanied by his two childhood friends, Iyeyasu and Sayo, and sets off into the Capital to search of a way to make money in order to assist his poverty-stricken village. After being separated from his friends in a bandit attack, Tatsumi unsuccessfully attempts to enlist in the army and is swindled out of his money in the Capital. He is taken in by a noble family, but when an assassin group called Night Raid attacks, he learns that his noble hosts actually intended to torture and kill him as they had done to his friends.",
+      "category": "personal",
+      "id": 5
+    },
+    {
+      "title": "My neighbour Totoro",
+      "description": "animals called Danger Beasts (危険種, kikenshu). The power of the Teigu is so overwhelming that it is said that when two Teigu users fight each other, at least one of them is bound to die.\n\nAlthough Night Raid successfully assassinate some of Honest's cohorts, they lose Sheele during a fight against capital garrison member Seryu and then Bulat when Honest recruits the Empire's sadist general Esdeath and her Three Beasts. Tatsumi receives Bulat's Teigu, Incursio, as a result while Esdeath replaced her slain subordinates with a group of Teigu-using warriors called the Jaegers. Night Raid, along with new recruits Susanoo (a humanoid Teigu owned by Najenda) and Chelsea, fight the Jaegers with Seryu, Wave, and Akame's younger sister Kurome among its ranks. Over time, the two factions gradually lose some of their members.",
+      "category": "study",
+      "id": 6
+    },
+    {
+      "title": "Code more till you get there",
+      "description": "animals called Danger Beasts (危険種, kikenshu). The power of the Teigu is so overwhelming that it is said that when two Teigu users fight each other, at least one of them is bound to die.\nht rdinates with a group of Teigu-using warriors called the Jaegers. Night Raid, along with new recruits Susanoo (a me among its ranks. Over time, the two factions gra",
+      "category": "business",
+      "id": 7
+    },
+    {
+      "title": "The one legend",
+      "description": "      Notice the use of %PUBLIC_URL% in the tags above.\n      It will be replaced with the URL of the `public` folder during the build.\n      Only files inside the `public` folder can be referenced from the HTM\n      Unlike \"/favicon.ico\" or \"favicon.ico\", \"%PUBLIC_URL%/favicon.ico\" will\n      work correctly both with client-side routing and a non-root public URL.\n Learn how to configure a non-root public URL by running `npm run build`.",
+      "category": "personal",
+      "id": 8
     }
   ]
 }

@@ -1,32 +1,5 @@
-// export default function Layout({ children }) {
-//   return (
-//     <div className="container">
-//       <Box sx={{ flexGrow: 1 }}>
-//         <AppBar position="static">
-//           <Toolbar>
-//             <IconButton
-//               size="large"
-//               edge="start"
-//               color="inherit"
-//               aria-label="menu"
-//               sx={{ mr: 2 }}
-//             >
-//               <MenuIcon />
-//             </IconButton>
-//             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-//               News
-//             </Typography>
-//             <Button color="inherit">Login</Button>
-//           </Toolbar>
-//         </AppBar>
-//       </Box>
-//       <p>Layout</p>
-//       <div>{children}</div>
-//     </div>
-//   );
-// }
-
 import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -45,15 +18,39 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
+import NewDate from "../date/newDate";
+import Split from "react-split";
+import { red } from "@mui/material/colors";
+import NoteAltIcon from "@mui/icons-material/NoteAlt";
+import ControlPointRoundedIcon from "@mui/icons-material/ControlPointRounded";
+import { Link, useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
 
 function Layout(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const menuItems = [
+    {
+      text: "My Notes",
+      icon: <NoteAltIcon />,
+      path: "/",
+    },
+    {
+      text: "Create Note",
+      icon: <ControlPointRoundedIcon />,
+      path: "/create",
+    },
+  ];
+
+  const style = {
+    colorBg: "#f5f5f5",
   };
 
   const drawer = (
@@ -61,15 +58,27 @@ function Layout(props) {
       <Toolbar />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {menuItems.map((item, index) => (
+          <Link
+            key={index + 1}
+            to={item.path}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <ListItem
+              disablePadding
+              sx={{
+                bgcolor: location.pathname == item.path ? style.colorBg : "",
+              }}
+            >
+              <ListItemButton>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
@@ -96,9 +105,12 @@ function Layout(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
+        elevation={1}
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
+          bgcolor: "#ffff",
+          color: "black",
         }}
       >
         <Toolbar>
@@ -112,16 +124,20 @@ function Layout(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {Date()}
+            {<NewDate />}
           </Typography>
           <Button color="inherit" sx={{ border: 1 }}>
             Login
           </Button>
         </Toolbar>
       </AppBar>
+      {/* <Split sizes={[25, 75]} direction="horizontal"> */}
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{
+          width: { sm: drawerWidth },
+          flexShrink: { sm: 0 },
+        }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -157,16 +173,17 @@ function Layout(props) {
           {drawer}
         </Drawer>
       </Box>
+      {/* </Split> */}
+
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
         <Toolbar />
-        <div sx={{ bgcolor: "#e8e3d5" }}>{props.children}</div>
+        <div style={{ background: style.colorBg }}>{props.children}</div>
       </Box>
     </Box>
   );
