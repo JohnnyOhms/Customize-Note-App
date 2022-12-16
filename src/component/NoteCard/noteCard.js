@@ -2,16 +2,34 @@ import { Avatar, Card, CardContent, CardHeader } from "@mui/material";
 import { IconButton, Typography } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Container } from "@mui/system";
-import { red } from "@mui/material/colors";
+import { red, yellow, blue, green } from "@mui/material/colors";
 import React from "react";
 
 export default function NoteCard(props) {
+  const categoryColor = (note) => {
+    if (note === "personal") {
+      return yellow[700];
+    }
+    if (note === "study") {
+      return green[500];
+    }
+    if (note === "business") {
+      return red[500];
+    }
+    return blue[500];
+  };
+
   return (
-    <Container sx={{ py: 3 }}>
+    <Container sx={{ py: 2, px: 0 }}>
       <Card>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            <Avatar
+              sx={{
+                bgcolor: categoryColor(props.note.category),
+              }}
+              aria-label="recipe"
+            >
               {props.note.category[0].toUpperCase()}
             </Avatar>
           }

@@ -20,7 +20,6 @@ import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import NewDate from "../date/newDate";
 import Split from "react-split";
-import { red } from "@mui/material/colors";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ControlPointRoundedIcon from "@mui/icons-material/ControlPointRounded";
 import { Link, useLocation } from "react-router-dom";
@@ -49,8 +48,17 @@ function Layout(props) {
     },
   ];
 
+  const subMenuItems = [
+    {
+      text: "Markdown",
+      icons: "",
+      path: "/editor",
+    },
+  ];
+
   const style = {
     colorBg: "#f5f5f5",
+    colorIcon: "#fa8072",
   };
 
   const drawer = (
@@ -74,7 +82,9 @@ function Layout(props) {
               }}
             >
               <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemIcon sx={{ color: style.colorIcon }}>
+                  {item.icon}
+                </ListItemIcon>
                 <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
@@ -83,15 +93,24 @@ function Layout(props) {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {subMenuItems.map((item, index) => (
+          <Link
+            key={index + 1}
+            to={item.path}
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon sx={{ color: style.colorIcon }}>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>

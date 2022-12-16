@@ -3,19 +3,19 @@
     {
       "title": "Yoshi's birthday bash",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      "category": "reminders",
+      "category": "personal",
       "id": 1
     },
     {
       "title": "Complete my ninja training",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took.",
-      "category": "work",
+      "category": "study",
       "id": 2
     },
     {
       "title": "Order a pizza!",
       "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      "category": "todos",
+      "category": "business",
       "id": 3
     },
     {
@@ -41,6 +41,12 @@
       "description": "      Notice the use of %PUBLIC_URL% in the tags above.\n      It will be replaced with the URL of the `public` folder during the build.\n      Only files inside the `public` folder can be referenced from the HTM\n      Unlike \"/favicon.ico\" or \"favicon.ico\", \"%PUBLIC_URL%/favicon.ico\" will\n      work correctly both with client-side routing and a non-root public URL.\n Learn how to configure a non-root public URL by running `npm run build`.",
       "category": "personal",
       "id": 8
+    },
+    {
+      "title": "Add the markdown feature",
+      "description": "The members of Night Raid carry Teigu (帝具, anime: Imperial Arms), unique weaponry created 900 years ago out of extremely rare materials as well as legendary animals called Danger Beasts (危険種, kikenshu). The power of the Teigu is so overwhelming that it is said that when two Teigu users fight each other, at least one of them is bound to die.",
+      "category": "business",
+      "id": 9
     }
   ]
 }

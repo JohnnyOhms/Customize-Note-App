@@ -37,17 +37,18 @@ export default class Notes extends Component {
   render() {
     return (
       <Container>
-        {/* <Grid container spacing={1}> */}
         <Masonry
           breakpointCols={3}
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
         >
+          {/* <Grid container spacing={1}> */}
           {this.state.notes.map((note) => (
             <Grid item xs={12} md={6} lg={4} key={note.id}>
               <NoteCard note={note} handleDelete={this.handleDelete} />
             </Grid>
           ))}
+          {/* </Grid> */}
         </Masonry>
       </Container>
     );
