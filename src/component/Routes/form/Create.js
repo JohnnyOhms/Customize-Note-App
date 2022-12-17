@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import { RadioGroup, TextField, Typography } from "@mui/material";
 import { FormLabel, Radio, Button } from "@mui/material";
 import { Container, FormControl, FormControlLabel } from "@mui/material";
@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Alert, Stack } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Create() {
   const [values, setValues] = useState({
@@ -17,7 +17,6 @@ export default function Create() {
     validateDescription: false,
     validateAlert: false,
   });
-
   const navigation = useNavigate();
 
   const submitHandler = (e) => {
@@ -48,7 +47,12 @@ export default function Create() {
     }
 
     const { title, description, category } = values;
-    const postData = { title, description, category };
+    let timePmAm = new Date().toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const date = timePmAm;
+    const postData = { title, description, category, date };
 
     axios
       .post("http://localhost:3004/notes", postData)

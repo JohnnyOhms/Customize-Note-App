@@ -39,7 +39,7 @@ export default function NoteCard(props) {
             </IconButton>
           }
           title={props.note.title}
-          subheader="September 14, 2016"
+          subheader={props.note.date}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
