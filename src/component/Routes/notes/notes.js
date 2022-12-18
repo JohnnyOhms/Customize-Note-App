@@ -37,12 +37,12 @@ export default class Notes extends Component {
   render() {
     return (
       <Container>
-        <Masonry
+        {/* <Masonry
           breakpointCols={3}
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column"
-        >
-          {/* <Grid container spacing={1}> */}
+        > */}
+        <Grid container spacing={1}>
           {this.state.notes
             .slice(0)
             .reverse()
@@ -51,8 +51,8 @@ export default class Notes extends Component {
                 <NoteCard note={note} handleDelete={this.handleDelete} />
               </Grid>
             ))}
-          {/* </Grid> */}
-        </Masonry>
+        </Grid>
+        {/* </Masonry> */}
       </Container>
     );
   }

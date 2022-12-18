@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -58,12 +57,25 @@ function Layout(props) {
 
   const style = {
     colorBg: "#f5f5f5",
-    colorIcon: "#fa8072",
+    colorIcon: "#0091ff",
   };
 
   const drawer = (
     <div>
       <Toolbar />
+      <ListItem
+        disablePadding
+        sx={{
+          position: "absolute",
+          top: 25,
+          left: 10,
+          fontSize: "",
+        }}
+      >
+        <Typography sx={{ p: 0, m: 0 }} varaint="body" component="p">
+          Note App
+        </Typography>
+      </ListItem>
       <Divider />
       <List>
         {menuItems.map((item, index) => (
