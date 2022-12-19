@@ -18,6 +18,7 @@ export default function CategoryFormat(props) {
               key={item.id}
               control={<Checkbox name={item.value} />}
               label={item.label}
+              onChange={() => props.Del_category(item.value)}
             />
           );
         })}
@@ -31,15 +32,10 @@ export default function CategoryFormat(props) {
         id="outlined-basic"
         label="Outlined"
         variant="outlined"
+        onChange={props.Add_category}
         fullWidth
       />
       <List sx={{ width: "100%", m: 0 }}>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>A</Avatar>
-          </ListItemAvatar>
-          <ListItemText primary="" />
-        </ListItem>
         {props.category.map((item) => {
           return (
             <ListItem key={item.id}>
@@ -65,13 +61,18 @@ export default function CategoryFormat(props) {
           noValidate
           autoComplete="off"
         >
-          {AddCategory}
-          {/* {DeleteCategory} */}
+          {props.editCategory.add ? AddCategory : DeleteCategory}
+
           <Button
             variant="contained"
             size="small"
-            //   endIcon={<BorderColorIcon />}
-            sx={{ my: 1, bgcolor: red[500] }}
+            sx={{
+              my: 1,
+              bgcolor: props.editCategory.add ? green[500] : red[500],
+              "&:hover": {
+                backgroundColor: props.editCategory.add ? green[300] : red[300],
+              },
+            }}
             onClick={props.updateCategoryBtn}
           >
             update

@@ -7,7 +7,7 @@ import { Alert, Stack } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import axios from "axios";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { green, red } from "@mui/material/colors";
 import CategoryFormat from "./categoryformat";
@@ -22,7 +22,12 @@ export default function Create() {
     validateAlert: false,
   });
 
-  const [editCategory, setEditcategory] = useState(false);
+  // state to conditional render either the delete or edit category route and also render the create note page
+  const [editCategory, setEditcategory] = useState({
+    set: false,
+    add: true,
+  });
+  // end
 
   const [category, setCategory] = useState([
     {
@@ -42,10 +47,20 @@ export default function Create() {
     },
   ]);
 
+  const delArray = [];
+  let newCategory = {
+    id: "",
+    value: "",
+    label: "",
+  };
+
+  // navigation route on either adding or deleting of categories
   const navigation = useNavigate();
   const { search } = useLocation();
   const match = search.match(/type=(.*)/);
   const type = match?.[1];
+
+  //end
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -100,13 +115,49 @@ export default function Create() {
     }, 2000);
   };
 
-  const editCategoryState = () => {
-    setEditcategory((preveItem) => !preveItem);
+  const editCategoryState = (text) => {
+    if (text === "add") {
+      setEditcategory((preveItem) => ({
+        set: !preveItem.set,
+        add: true,
+      }));
+      console.log("add");
+    } else if (text === "delete") {
+      setEditcategory((preveItem) => ({
+        set: !preveItem.set,
+        add: false,
+      }));
+      console.log("delete");
+    } else if (text === "update") {
+      setEditcategory((preveItem) => ({
+        ...preveItem,
+        set: false,
+      }));
+    }
   };
 
   const updateCategoryBtn = () => {
-    editCategoryState();
+    editCategoryState("update");
     navigation("/create");
+    setCategory((prevCategory) =>
+      newCategory.id !== "" ? [...prevCategory, newCategory] : [...prevCategory]
+    );
+  };
+
+  // delete the categories with checkBox
+  const Del_category = (value) => {
+    if (delArray.includes(value)) return;
+    delArray.push(value);
+    console.log(delArray);
+  };
+
+  // add category handler function
+  const Add_category = (event) => {
+    newCategory = {
+      id: category.length + 1,
+      value: event.target.value,
+      label: event.target.value,
+    };
   };
 
   return (
@@ -115,10 +166,13 @@ export default function Create() {
         <CategoryFormat
           updateCategoryBtn={updateCategoryBtn}
           category={category}
+          editCategory={editCategory}
+          Del_category={Del_category}
+          Add_category={Add_category}
         />
       )}
       <Container sx={{ height: "100vh", width: "100vw", py: 3 }}>
-        {!editCategory && (
+        {!editCategory.set && (
           <React.Fragment>
             {values.validateAlert && (
               <Stack sx={{ width: "100%", pt: 2 }} spacing={2}>
@@ -207,7 +261,7 @@ export default function Create() {
               </Button>
 
               <Link
-                onClick={editCategoryState}
+                onClick={() => editCategoryState("add")}
                 to="/create?type=updateCategory"
                 style={{
                   textDecoration: "none",
@@ -225,7 +279,7 @@ export default function Create() {
               </Link>
 
               <Link
-                onClick={editCategoryState}
+                onClick={() => editCategoryState("delete")}
                 to="/create?type=updateCategory"
                 style={{
                   textDecoration: "none",
