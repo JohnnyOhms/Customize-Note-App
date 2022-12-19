@@ -3,7 +3,7 @@ import axios from "axios";
 import { Container } from "@mui/system";
 import { Grid } from "@mui/material";
 import NoteCard from "../../NoteCard/noteCard";
-import Masonry from "react-masonry-css";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default class Notes extends Component {
   state = {
@@ -37,22 +37,25 @@ export default class Notes extends Component {
   render() {
     return (
       <Container>
-        {/* <Masonry
-          breakpointCols={3}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        > */}
-        <Grid container spacing={1}>
-          {this.state.notes
-            .slice(0)
-            .reverse()
-            .map((note) => (
-              <Grid item xs={12} md={6} lg={4} key={note.id}>
-                <NoteCard note={note} handleDelete={this.handleDelete} />
-              </Grid>
-            ))}
-        </Grid>
-        {/* </Masonry> */}
+        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+          <Masonry>
+            {this.state.notes
+              .slice(0)
+              .reverse()
+              .map((note) => (
+                <Grid
+                  item
+                  xs={12}
+                  md={6}
+                  lg={4}
+                  key={note.id}
+                  sx={{ m: 0, p: 0 }}
+                >
+                  <NoteCard note={note} handleDelete={this.handleDelete} />
+                </Grid>
+              ))}
+          </Masonry>
+        </ResponsiveMasonry>
       </Container>
     );
   }

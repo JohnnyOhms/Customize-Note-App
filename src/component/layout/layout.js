@@ -56,7 +56,7 @@ function Layout(props) {
   ];
 
   const style = {
-    colorBg: "#f5f5f5",
+    colorBg: "#eee7e7",
     colorIcon: "#0091ff",
   };
 
