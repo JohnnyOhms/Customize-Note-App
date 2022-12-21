@@ -21,7 +21,8 @@ import NewDate from "../date/newDate";
 import Split from "react-split";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import ControlPointRoundedIcon from "@mui/icons-material/ControlPointRounded";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContex";
 
 const drawerWidth = 240;
 
@@ -33,6 +34,9 @@ function Layout(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const { currentUser, setCurrentUser, signout } = useAuth();
+  const navigation = useNavigate();
 
   const menuItems = [
     {
@@ -58,6 +62,17 @@ function Layout(props) {
   const style = {
     colorBg: "#eee7e7",
     colorIcon: "#0091ff",
+  };
+
+  const clikcHandler = () => {
+    signout()
+      .then(() => {
+        setCurrentUser("");
+        navigation("/");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const drawer = (
@@ -131,79 +146,88 @@ function Layout(props) {
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
-  return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        elevation={1}
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-          bgcolor: "#ffff",
-          color: "black",
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+  const Render = (
+    <>
+      {currentUser && (
+        <>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            elevation={1}
+            sx={{
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+              ml: { sm: `${drawerWidth}px` },
+              bgcolor: "#ffff",
+              color: "black",
+            }}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            {<NewDate />}
-          </Typography>
-          <Button color="inherit" sx={{ border: 1 }}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-      {/* <Split sizes={[25, 75]} direction="horizontal"> */}
-      <Box
-        component="nav"
-        sx={{
-          width: { sm: drawerWidth },
-          flexShrink: { sm: 0 },
-        }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { sm: "none" } }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
+                {<NewDate />}
+              </Typography>
+              <Button color="inherit" sx={{ border: 1 }} onClick={clikcHandler}>
+                Logout
+              </Button>
+            </Toolbar>
+          </AppBar>
+          {/* <Split sizes={[25, 75]} direction="horizontal"> */}
+          <Box
+            component="nav"
+            sx={{
+              width: { sm: drawerWidth },
+              flexShrink: { sm: 0 },
+            }}
+            aria-label="mailbox folders"
+          >
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: "block", sm: "none" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                },
+              }}
+            >
+              {drawer}
+            </Drawer>
+            <Drawer
+              variant="permanent"
+              sx={{
+                display: { xs: "none", sm: "block" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                },
+              }}
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Box>
+        </>
+      )}
       {/* </Split> */}
 
       <Box
@@ -214,10 +238,14 @@ function Layout(props) {
         }}
       >
         <Toolbar />
-        <div style={{ background: style.colorBg }}>{props.children}</div>
+        <div style={{ background: style.colorBg, height: "100%" }}>
+          {props.children}
+        </div>
       </Box>
-    </Box>
+    </>
   );
+
+  return <Box sx={{ display: "flex" }}>{Render}</Box>;
 }
 
 Layout.propTypes = {

@@ -9,7 +9,7 @@ export default function SignUp() {
   const Passwordref = useRef();
   const confirmPasswordref = useRef();
   const { singup } = useAuth();
-  const { currentUser, setCurrentUser } = useAuth();
+  const { setCurrentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [mssg, setMessage] = useState("");
   const navigation = useNavigate();

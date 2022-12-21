@@ -68,7 +68,7 @@ export default function Login() {
           sx={{ m: 1, px: 3 }}
           disabled={loading}
         >
-          Sign Up
+          Log In
         </Button>
         <Typography variant="h6">
           Dont have an account?

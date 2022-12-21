@@ -6,10 +6,8 @@ import NoteEditor from "./component/Routes/editor/editor";
 import Create from "./component/Routes/form/Create";
 import Notes from "./component/Routes/notes/notes";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import AuthProvider from "./context/AuthContex";
 import SignUp from "./component/Routes/Auth/SignUp";
 import Login from "./component/Routes/Auth/Login";
-import PrivateRoute from "./component/Routes/privateRoute/privateRoute";
 import { useAuth } from "./context/AuthContex";
 
 function App() {
@@ -24,20 +22,23 @@ function App() {
     },
   });
 
+  const { currentUser } = useAuth();
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <AuthProvider>
-          <Layout>
-            <Routes>
-              <PrivateRoute path="/" element={<Notes />} />
-              <Route path="/create" exact element={<Create />} />
-              <Route path="/editor" exact element={<NoteEditor />} />
-              <Route path="/signup" exact element={<SignUp />} />
-              <Route path="/login" exact element={<Login />} />
-            </Routes>
-          </Layout>
-        </AuthProvider>
+        <Layout>
+          <Routes>
+            <Route
+              path="/"
+              element={!currentUser ? <Navigate to="/signup" /> : <Notes />}
+            />
+            <Route path="/create" exact element={<Create />} />
+            <Route path="/editor" exact element={<NoteEditor />} />
+            <Route path="/signup" exact element={<SignUp />} />
+            <Route path="/login" exact element={<Login />} />
+          </Routes>
+        </Layout>
       </Router>
     </ThemeProvider>
   );
